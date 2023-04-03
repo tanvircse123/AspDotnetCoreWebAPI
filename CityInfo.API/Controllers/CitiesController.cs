@@ -51,6 +51,9 @@ namespace CityInfo.API.Controllers
        }
 
        [HttpGet("getCity/{Id}")]
+       [ProducesResponseType(StatusCodes.Status200OK)]
+       [ProducesResponseType(StatusCodes.Status404NotFound)]
+       [ProducesResponseType(StatusCodes.Status400BadRequest)]
        public async Task<ActionResult> GetCityAsyncFull(int Id,bool includePointsOfInterest = false){
         var city = await _repo.GetCityAsync(Id,includePointsOfInterest);
         if(city == null){
