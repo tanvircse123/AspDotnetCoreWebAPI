@@ -33,12 +33,15 @@ namespace CityInfo.API.Controllers
                 city = city,
                 POI = POI
             };
-            Console.WriteLine(JsonSerializer.Serialize(contextModel));
+           
             _repo.AddCity(contextModel);
             return Ok("Added");
+       }
 
-            
-
+       [HttpGet("getCity/{Id}")]
+       public async Task<ActionResult> GetCityAsyncFull(int Id){
+        var city = await _repo.GetCityAsync(Id,true);
+        return Ok(_mapper.Map<CityDto>(city));
        }
 
     }

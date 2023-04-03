@@ -63,13 +63,11 @@ namespace CityInfo.API.Migrations
 
             modelBuilder.Entity("CityInfo.API.Entities.PointOdInterest", b =>
                 {
-                    b.HasOne("CityInfo.API.Entities.City", "City")
+                    b.HasOne("CityInfo.API.Entities.City", null)
                         .WithMany("PointOdInterests")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("CityInfo.API.Entities.City", b =>

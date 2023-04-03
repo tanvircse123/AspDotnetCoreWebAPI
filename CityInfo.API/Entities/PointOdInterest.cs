@@ -23,7 +23,9 @@ namespace CityInfo.API.Entities
         public string? Description {get;set;}
 
         [ForeignKey("CityId")]
-        public City? City {get;set;}
+        //public City? City {get;set;} // dont put it in here it will create a circuler dependency 
+        // from city it will come to here and from here it will go again in the city thus creating a 
+        // circular dependency
         public int CityId {get;set;}
     }
 }

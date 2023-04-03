@@ -13,6 +13,7 @@ namespace CityInfo.API.Profiles
         public CityProfile()
         {
             CreateMap<CreatePOIViewModel,PointOdInterest>();
+            CreateMap<City,CityDto>();
             //CreateMap<PointOdInterest,CreatePOIViewModel>();
         }
     }
