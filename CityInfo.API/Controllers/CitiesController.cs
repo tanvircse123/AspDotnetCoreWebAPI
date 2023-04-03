@@ -24,6 +24,18 @@ namespace CityInfo.API.Controllers
             _mapper = mapper;
        }
 
+       [HttpGet]
+       public async Task<ActionResult> GetCities(string? name,string? searchQuery,int pageNumber = 1,int pageSize = 10){
+        if (pageSize > MaxCitiesPageSize)
+        {
+            pageSize = MaxCitiesPageSize;
+        }
+        var (cityEntities,paginatinMatadata) = await _repo.GetCitiesAsync(name,searchQuery,pageNumber,pageSize);
+        Response.Headers.Add("X-Pagination",JsonSerializer.Serialize(paginatinMatadata));
+        return Ok(cityEntities);
+
+       }
+
        [HttpPost]
        public ActionResult AddCity(CreateCityViewModel cityreq){
             var city = new City(cityreq.Name);
@@ -39,9 +51,17 @@ namespace CityInfo.API.Controllers
        }
 
        [HttpGet("getCity/{Id}")]
-       public async Task<ActionResult> GetCityAsyncFull(int Id){
-        var city = await _repo.GetCityAsync(Id,true);
-        return Ok(_mapper.Map<CityDto>(city));
+       public async Task<ActionResult> GetCityAsyncFull(int Id,bool includePointsOfInterest = false){
+        var city = await _repo.GetCityAsync(Id,includePointsOfInterest);
+        if(city == null){
+            return NotFound();
+        }
+        if(includePointsOfInterest){
+            return Ok(_mapper.Map<CityDto>(city));
+        }
+        return  Ok(_mapper.Map<CityWithOutPOIDto>(city));
+
+        
        }
 
     }
