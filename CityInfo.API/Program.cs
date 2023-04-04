@@ -3,7 +3,22 @@ using CityInfo.API.Services.CityRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+
+/*
+    Support for the xml input and output
+    insted of Json we add the xml input and output
+    in the builder.Services.AddController()
+    but the entities has to have parameterless constructor
+*/
+
+
+builder.Services.AddControllers(op=>{
+    op.ReturnHttpNotAcceptable = true;
+}).AddXmlDataContractSerializerFormatters();
+
+
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var dbConnection = builder.Configuration["ConnectionStrings:CityInfoConnectonString"];

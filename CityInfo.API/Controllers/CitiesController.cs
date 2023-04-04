@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
-using CityInfo.API.Controllers.Base;
 using CityInfo.API.Entities;
 using CityInfo.API.Model.Dto;
 using CityInfo.API.Services.CityRepository;
@@ -12,7 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.API.Controllers
 {
-    public class CitiesController:BaseApi
+    [ApiController]
+    [Route("api/cities")]
+    public class CitiesController:ControllerBase
     {
         private ICityInfoRepository _repo;
         private IMapper _mapper;
@@ -50,7 +51,7 @@ namespace CityInfo.API.Controllers
             return Ok("Added");
        }
 
-       [HttpGet("getCity/{Id}")]
+       [HttpGet("{Id}")]
        [ProducesResponseType(StatusCodes.Status200OK)]
        [ProducesResponseType(StatusCodes.Status404NotFound)]
        [ProducesResponseType(StatusCodes.Status400BadRequest)]
