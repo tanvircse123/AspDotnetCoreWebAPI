@@ -54,6 +54,7 @@ namespace CityInfo.API.Services.CityRepository
                 var city = await GetCityAsync(cityId,false);
                 if(city != null){
                     city.PointOdInterests.Add(pointOdInterest);
+                    await _context.SaveChangesAsync();
                 }
 
             }catch{
