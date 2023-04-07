@@ -17,6 +17,7 @@ namespace CityInfo.API.Profiles
             CreateMap<City,CityWithOutPOIDto>();
             CreateMap<POICreationDto,PointOdInterest>();
             CreateMap<PointOdInterest,PointOfInterestDto>();
+            CreateMap<POIUpdateDto,PointOdInterest>();
             //CreateMap<PointOdInterest,CreatePOIViewModel>();
         }
     }

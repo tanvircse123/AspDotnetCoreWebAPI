@@ -15,7 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(op=>{
     op.ReturnHttpNotAcceptable = true;
-}).AddXmlDataContractSerializerFormatters();
+})
+.AddNewtonsoftJson()
+.AddXmlDataContractSerializerFormatters();
 
 
 
